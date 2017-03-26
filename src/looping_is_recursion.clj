@@ -8,16 +8,18 @@
     (helper 1 exp)))
 
 (defn last-element [a-seq]
-  (let [helper (fn [acc]
-                 (if (== (count acc) 1)
-                   (first acc)
-                   (recur (rest acc))))]
-    (helper a-seq)))
+  (if (empty? a-seq)
+    nil
+    (let [helper (fn [acc]
+                   (if (== (count acc) 1)
+                     (first acc)
+                     (recur (rest acc))))]
+      (helper a-seq))))
 
 (defn seq= [seq1 seq2]
   (let [helper (fn [acc n]
                  (if (>= n 0)
-                   (if (== (get seq1 n) (get seq2 n))
+                   (if (== (nth seq1 n) (nth seq2 n))
                      (recur acc (dec n))
                      false)
                    acc))]
